@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Task List</h1>
+  <div class="create-buttons">
+    <a href="{% url 'tasks:create_task' %}" class="btn btn-primary">Create Task</a>
+    <a href="{% url 'tasks:create_category' %}" class="btn btn-primary">Create Category</a>
+  </div>
+
+  <div class="row mt-4">
+    {% for task in tasks %}
+      <div class="col-md-4 mb-4">
+        <div class="task-block {% if task.completed %}completed{% elif task.deadline < now %}overdue{% else %}in-progress{% endif %} p-3 h-100 d-flex flex-column"> 
+          <h3 class="text-center mb-3">{{ task.title }}</h3>
+          <div class="flex-grow-1">
+            <p>Category: {{ task.category }}</p>
+            <p>Description: {{ task.description }}</p>
+            <p>Deadline: {{ task.deadline }}</p>
+            <p>Author: {{ task.author }}</p>
+            <p>Created at: {{ task.created_at }}</p>
+            <p>Completed: {{ task.completed }}</p>
+          </div>
+          <div class="button-group mt-2">
+            <form action="{% url 'tasks:complete_task' task.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary">Change Status</button>
+            </form>
+            <form action="{% url 'tasks:delete_task' task.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Delete Task</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% cycle '' '' '</div><div class="row mt-4">' %}
+    {% empty %}
+      <p>No tasks found.</p>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+.task-block {
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .task-block.completed {
+    background-color: rgb(3, 248, 141);
+  }
+  
+  .task-block.overdue {
+    background-color: rgb(238, 110, 212);
+  }
+  
+  .task-block.in-progress {
+    background-color: rgb(234, 234, 150);
+  }
+  
+  .task-block .complete-button {
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .create-buttons {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
